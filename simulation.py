@@ -3,6 +3,7 @@ from numpy import double, ndarray
 import numpy as np
 from celestial_body import CelestialBody
 from config import G
+from integrator import Integrator
 
 class Simulation:
     """Class responsible for handling the simulation and the calculations involving it"""
@@ -19,6 +20,7 @@ class Simulation:
         self.bodies = bodies
         self.delta_t = delta_t
         self.method = method
+        self.integrator = Integrator(method, self.f)
 
     def f(self, body: CelestialBody, t: double, position: ndarray, velocity: ndarray) -> Tuple[ndarray, ndarray]:
         """Calculate the derivatives (velocity and acceleration) for a given body at a given time and state.
@@ -47,3 +49,7 @@ class Simulation:
 
         # Return the derivative of position (velocity) and the derivative of velocity (acceleration)
         return velocity, acceleration
+
+    def run(self):
+        for body in self.bodies:
+            self.integrator.integrate(body, self.delta_t)
