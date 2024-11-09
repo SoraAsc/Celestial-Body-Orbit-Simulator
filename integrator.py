@@ -4,7 +4,7 @@ from celestial_body import CelestialBody
 
 class Integrator():
     """The Integrator class contains the methods for the integration algorithms that update the position and velocity of the bodies"""
-    
+
     def __init__(self, method: str = "RK4", derivative_function = None):
         """Initialize the Integrator
 
@@ -57,6 +57,33 @@ class Integrator():
         initial_position = np.copy(body.position)
         initial_velocity = np.copy(body.velocity)
         
+        # k1
+        k1_vel, k1_acc = self.derivative_function(body, t, initial_position, initial_velocity)
+
+        # k2: halfway step
+        k2_vel, k2_acc = self.derivative_function(
+            body, t + 0.5 * delta_t,
+            initial_position + 0.5 * delta_t * k1_vel,
+            initial_velocity + 0.5 * delta_t * k1_acc
+        )
+
+        # k3: another halfway step
+        k3_vel, k3_acc = self.derivative_function(
+            body, t + 0.5 * delta_t,
+            initial_position + 0.5 * delta_t * k2_vel,
+            initial_velocity + 0.5 * delta_t * k2_acc
+        )
+
+        # k4: full step
+        k4_vel, k4_acc = self.derivative_function(
+            body, t + delta_t,
+            initial_position + delta_t * k3_vel,
+            initial_velocity + delta_t * k3_acc
+        )
+
+        # Update position and velocity using the RK4 weighted average
+        body.position += (delta_t / 6) * (k1_vel + 2 * k2_vel + 2 * k3_vel + k4_vel)
+        body.velocity += (delta_t / 6) * (k1_acc + 2 * k2_acc + 2 * k3_acc + k4_acc)
 
 
 
