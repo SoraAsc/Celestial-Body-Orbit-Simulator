@@ -7,8 +7,19 @@ import random
 used_colors = set()
 
 class CelestialBody:
+    """Class that contains all the information and details of celestial bodies (Planets, Stars, Satellites, etc.)"""
+    
     def __init__(self, name: str, mass: double, position: ndarray, velocity: ndarray, color: Optional[Tuple[int, int, int]] = None):
-        """Initialize the celestial body"""
+        """Initialize the celestial body
+
+        Args:
+            name (str): The Celestial Body name
+            mass (double): The mass of the celestial body
+            position (ndarray): The initial position of the body
+            velocity (ndarray): The initial velocity of the body
+            color (Optional[Tuple[int, int, int]], optional): The color, if not provided is a random color. Defaults to None.
+        """
+
         self.name = name
         self.mass = mass
         self.position = position
@@ -17,7 +28,12 @@ class CelestialBody:
         self.color = color if color is not None else self.generate_unique_color()
 
     def generate_unique_color(self) -> Tuple[int, int, int]:
-        """Generate a unique RGB color that hasn't been used yet"""
+        """Generate a unique RGB color that hasn't been used yet
+
+        Returns:
+            color (Tuple[int, int, int]): The RGB color as a tuple (0...255, 0...255, 0...255)
+        """
+
         while True:
             # Generate a random color
             new_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
@@ -27,5 +43,10 @@ class CelestialBody:
                 return new_color
             
     def __str__(self):
-        """String representation of the object"""
+        """String representation of the object
+
+        Returns:
+            str: The description of the object
+        """
+        
         return f"CelestialBody(name={self.name}, mass={self.mass}, position={self.position}, velocity={self.velocity}, color={self.color})"
