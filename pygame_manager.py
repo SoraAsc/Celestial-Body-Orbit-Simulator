@@ -16,9 +16,12 @@ class PygameManager:
 
         pygame.init()
         self.screen = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1]))
+        self.trail_surface = pygame.Surface((SCREEN_SIZE[0], SCREEN_SIZE[1]), pygame.SRCALPHA)  # Allow transparency
+        self.trail_surface.set_alpha(30)
         self.template_loader = TemplateLoader("templates.json")
         self.simulation = Simulation(self.template_loader.get_template("solar_system"), DELTA_T)
         self.clock = pygame.time.Clock()
+        self.trail_limit = 200
 
         # Initial variabels
         self.zoom = 1
@@ -36,12 +39,21 @@ class PygameManager:
         self.camera_pos[1] = max(-WORLD_SIZE[1] + half_screen_height, min(self.camera_pos[1], WORLD_SIZE[1] - half_screen_height))
 
         self.screen.fill((0, 0, 0)) # Clear screen
+        self.trail_surface.fill((0, 0, 0)) # Clear screen
 
         for body in self.simulation.bodies:
+            body.update_trail(self.trail_limit)
             x = int((body.position[0] / SCALE - self.camera_pos[0])  * self.zoom + CENTER[0])
             y = int((body.position[1] / SCALE - self.camera_pos[1])  * self.zoom + CENTER[1])
             pygame.draw.circle(self.screen, body.color, (x, y), 8 * self.zoom)
 
+            for trail_pos in body.trails_pos:
+                trail_x = int((trail_pos[0] / SCALE - self.camera_pos[0]) * self.zoom + CENTER[0])
+                trail_y = int((trail_pos[1] / SCALE - self.camera_pos[1]) * self.zoom + CENTER[1])
+
+                pygame.draw.circle(self.trail_surface, body.color, (trail_x, trail_y), 2 * self.zoom)
+
+        self.screen.blit(self.trail_surface, (0, 0))
         pygame.display.flip()
     
     def run(self):

@@ -26,6 +26,18 @@ class CelestialBody:
         self.velocity = velocity
         self.acceleration = np.zeros(position.shape)
         self.color = color if color is not None else self.generate_unique_color()
+        self.trails_pos = []
+
+    def update_trail(self, trail_limit: int):
+        """Update the trails list, insert a new position and remove if is beyond the limit
+
+        Args:
+            trail_limit (int): The number of trails that the body can have
+        """
+
+        self.trails_pos.append((self.position[0], self.position[1]))
+        if len(self.trails_pos) > trail_limit:
+            self.trails_pos.pop(0)
 
     def generate_unique_color(self) -> Tuple[int, int, int]:
         """Generate a unique RGB color that hasn't been used yet

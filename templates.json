@@ -9,28 +9,28 @@
         },
         {
             "name": "Mercury",
-            "mass": 3.285e23,
+            "mass": 3.301e23,
             "position": [5.7e10, 0],
             "velocity": [0, 47890],
             "color": [169, 169, 169]
         },
         {
             "name": "Venus",
-            "mass": 4.867e24,
+            "mass": 4.8673e24,
             "position": [1.082e11, 0],
             "velocity": [0, 35020],
             "color": [255, 223, 196]
         },
         {
             "name": "Earth",
-            "mass": 5.972e24,
+            "mass": 5.9722e24,
             "position": [1.496e11, 0],
             "velocity": [0, 29780],
             "color": [100, 149, 237]
         },
         {
             "name": "Mars",
-            "mass": 6.39e23,
+            "mass": 6.4169e23,
             "position": [2.279e11, 0],
             "velocity": [0, 24070],
             "color": [210, 105, 30]
@@ -44,31 +44,63 @@
         },
         {
             "name": "Jupiter",
-            "mass": 1.898e27,
+            "mass": 1.89813e27,
             "position": [7.785e11, 0],
             "velocity": [0, 13070],
             "color": [222, 184, 135]
         },
         {
             "name": "Saturn",
-            "mass": 5.683e26,
+            "mass": 5.6832e26,
             "position": [1.433e12, 0],
             "velocity": [0, 9680],
             "color": [245, 222, 179]
         },
         {
             "name": "Uranus",
-            "mass": 8.681e25,
+            "mass": 8.6811e28,
             "position": [2.872e12, 0],
             "velocity": [0, 6800],
             "color": [175, 238, 238]
         },
         {
             "name": "Neptune",
-            "mass": 1.024e26,
+            "mass": 1.02409e29,
             "position": [4.495e12, 0],
             "velocity": [0, 5400],
             "color": [0, 0, 205]
+        }
+    ],
+    "binary_system_equal_mass": [
+        {
+            "name": "Star A",
+            "mass": 4.0e30,
+            "position": [-1e11, 0],
+            "velocity": [0, 15000],
+            "color": [255, 255, 255]
+        },
+        {
+            "name": "Star B",
+            "mass": 4.0e30,
+            "position": [1e11, 0],
+            "velocity": [0, -15000],
+            "color": [255, 255, 255]
+        }
+    ],
+    "binary_system_unequal_mass": [
+        {
+            "name": "Massive A",
+            "mass": 5.0e30,
+            "position": [-5e10, 0],
+            "velocity": [0, 10000],
+            "color": [255, 223, 0]
+        },
+        {
+            "name": "Smaller Star",
+            "mass": 1.0e30,
+            "position": [1.5e11, 0],
+            "velocity": [0, -16000],
+            "color": [255, 69, 0]
         }
     ]
 }
