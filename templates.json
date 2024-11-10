@@ -1,0 +1,74 @@
+{
+    "solar_system": [
+        {
+            "name": "Sun",
+            "mass": 1.989e30,
+            "position": [0, 0],
+            "velocity": [0, 0],
+            "color": [255, 204, 0]
+        },
+        {
+            "name": "Mercury",
+            "mass": 3.285e23,
+            "position": [5.7e10, 0],
+            "velocity": [0, 47890],
+            "color": [169, 169, 169]
+        },
+        {
+            "name": "Venus",
+            "mass": 4.867e24,
+            "position": [1.082e11, 0],
+            "velocity": [0, 35020],
+            "color": [255, 223, 196]
+        },
+        {
+            "name": "Earth",
+            "mass": 5.972e24,
+            "position": [1.496e11, 0],
+            "velocity": [0, 29780],
+            "color": [100, 149, 237]
+        },
+        {
+            "name": "Mars",
+            "mass": 6.39e23,
+            "position": [2.279e11, 0],
+            "velocity": [0, 24070],
+            "color": [210, 105, 30]
+        },
+        {
+            "name": "Pluto",
+            "mass": 1.303e22,
+            "position": [5.906e12, 0],
+            "velocity": [0, 4750],
+            "color": [139, 69, 19]
+        },
+        {
+            "name": "Jupiter",
+            "mass": 1.898e27,
+            "position": [7.785e11, 0],
+            "velocity": [0, 13070],
+            "color": [222, 184, 135]
+        },
+        {
+            "name": "Saturn",
+            "mass": 5.683e26,
+            "position": [1.433e12, 0],
+            "velocity": [0, 9680],
+            "color": [245, 222, 179]
+        },
+        {
+            "name": "Uranus",
+            "mass": 8.681e25,
+            "position": [2.872e12, 0],
+            "velocity": [0, 6800],
+            "color": [175, 238, 238]
+        },
+        {
+            "name": "Neptune",
+            "mass": 1.024e26,
+            "position": [4.495e12, 0],
+            "velocity": [0, 5400],
+            "color": [0, 0, 205]
+        }
+    ]
+}

@@ -1,12 +1,13 @@
 import pygame
 
-from config import CENTER, SCALE, SCREEN_SIZE, WORLD_SIZE
+from config import CENTER, DELTA_T, SCALE, SCREEN_SIZE, WORLD_SIZE
 from simulation import Simulation
+from template_loader import TemplateLoader
 
 class PygameManager:
     """This classs handles the render and pygame interaction"""
 
-    def __init__(self, simulation: Simulation):
+    def __init__(self):
         """Initialize the Pygame Manager
 
         Args:
@@ -15,7 +16,8 @@ class PygameManager:
 
         pygame.init()
         self.screen = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1]))
-        self.simulation = simulation
+        self.template_loader = TemplateLoader("templates.json")
+        self.simulation = Simulation(self.template_loader.get_template("solar_system"), DELTA_T)
         self.clock = pygame.time.Clock()
 
         # Initial variabels
@@ -54,7 +56,7 @@ class PygameManager:
                     if(event.y > 0): # Zoom in
                         self.zoom = min(self.zoom * 1.1, 5)
                     elif event.y < 0: # Zoom out
-                        self.zoom = max(self.zoom / 1.1, 0.1)
+                        self.zoom = max(self.zoom / 1.1, 0.2)
                 elif event.type == pygame.MOUSEBUTTONDOWN: # Start dragging
                     if event.button == 1:  # Left mouse button
                         self.is_dragging = True
@@ -62,7 +64,6 @@ class PygameManager:
                 elif event.type == pygame.MOUSEBUTTONUP: # Stop dragging
                     if event.button == 1:
                         self.is_dragging = False
-
                 
             if self.is_dragging: # Handle panning
                 mouse_x, mouse_y = pygame.mouse.get_pos()
