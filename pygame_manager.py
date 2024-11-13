@@ -1,18 +1,16 @@
+import sys
 import pygame
 
 from config import CENTER, DELTA_T, SCALE, SCREEN_SIZE, WORLD_SIZE
 from simulation import Simulation
 from template_loader import TemplateLoader
+from ui_manager import UIManager
 
 class PygameManager:
     """This classs handles the render and pygame interaction"""
 
     def __init__(self):
-        """Initialize the Pygame Manager
-
-        Args:
-            simulation (Simulation): The orbit simulator
-        """
+        """Initialize the Pygame Manager"""
 
         pygame.init()
         self.screen = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1]))
@@ -21,6 +19,7 @@ class PygameManager:
         self.template_loader = TemplateLoader("templates.json")
         self.simulation = Simulation(self.template_loader.get_template("solar_system"), DELTA_T)
         self.clock = pygame.time.Clock()
+        self.ui_manager = UIManager()
         self.trail_limit = 200
 
         # Initial variabels
@@ -54,16 +53,20 @@ class PygameManager:
                 pygame.draw.circle(self.trail_surface, body.color, (trail_x, trail_y), 2 * self.zoom)
 
         self.screen.blit(self.trail_surface, (0, 0))
+
+        self.ui_manager.draw(self.screen)
+
         pygame.display.flip()
     
     def run(self):
         """Main Render Loop"""
-
         running = True
         while running:
+            delta_time = self.clock.tick(60) / 1000.0
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                    sys.exit()
                 elif event.type == pygame.MOUSEWHEEL: # Handle Zoom
                     if(event.y > 0): # Zoom in
                         self.zoom = min(self.zoom * 1.1, 5)
@@ -76,6 +79,7 @@ class PygameManager:
                 elif event.type == pygame.MOUSEBUTTONUP: # Stop dragging
                     if event.button == 1:
                         self.is_dragging = False
+                self.ui_manager.handle_event(event)
                 
             if self.is_dragging: # Handle panning
                 mouse_x, mouse_y = pygame.mouse.get_pos()
@@ -86,8 +90,8 @@ class PygameManager:
                     self.camera_pos[1] -= dy
                     self.last_mouse_pos = (mouse_x, mouse_y)
             
+            self.ui_manager.manager.update(delta_time)
             self.simulation.run()  # Update simulation state
             self.draw()
-            self.clock.tick(60)
 
         pygame.quit()

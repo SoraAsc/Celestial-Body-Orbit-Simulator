@@ -1,0 +1,17 @@
+{
+    "text_box":
+    {
+        "colours":
+        {
+            "normal_bg": "#00000000",
+            "dark_bg": "#00000000",
+            "normal_text": "#FFFFFF"
+        },
+        "misc":
+        {
+            "border_width": "1",
+            "padding": "10,10",
+            "line_spacing": "0.9"
+        }
+    }
+}

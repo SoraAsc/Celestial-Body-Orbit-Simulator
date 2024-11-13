@@ -1,0 +1,214 @@
+{
+    "solar_system": [
+        {
+            "name": "Sun",
+            "mass": 1.989e30,
+            "position": [0, 0],
+            "velocity": [0, 0],
+            "color": [255, 204, 0]
+        },
+        {
+            "name": "Mercury",
+            "mass": 3.285e23,
+            "position": [5.7e10, 0],
+            "velocity": [0, 47890],
+            "color": [169, 169, 169]
+        },
+        {
+            "name": "Venus",
+            "mass": 4.867e24,
+            "position": [1.082e11, 0],
+            "velocity": [0, 35020],
+            "color": [255, 223, 196]
+        },
+        {
+            "name": "Earth",
+            "mass": 5.972e24,
+            "position": [1.496e11, 0],
+            "velocity": [0, 29780],
+            "color": [100, 149, 237]
+        },
+        {
+            "name": "Mars",
+            "mass": 6.39e23,
+            "position": [2.279e11, 0],
+            "velocity": [0, 24070],
+            "color": [210, 105, 30]
+        },
+        {
+            "name": "Pluto",
+            "mass": 1.303e22,
+            "position": [5.906e12, 0],
+            "velocity": [0, 4750],
+            "color": [139, 69, 19]
+        },
+        {
+            "name": "Jupiter",
+            "mass": 1.898e27,
+            "position": [7.785e11, 0],
+            "velocity": [0, 13070],
+            "color": [222, 184, 135]
+        },
+        {
+            "name": "Saturn",
+            "mass": 5.683e26,
+            "position": [1.433e12, 0],
+            "velocity": [0, 9680],
+            "color": [245, 222, 179]
+        },
+        {
+            "name": "Uranus",
+            "mass": 8.681e25,
+            "position": [2.872e12, 0],
+            "velocity": [0, 6800],
+            "color": [175, 238, 238]
+        },
+        {
+            "name": "Neptune",
+            "mass": 1.024e26,
+            "position": [4.495e12, 0],
+            "velocity": [0, 5400],
+            "color": [0, 0, 205]
+        }
+    ],
+    "t1": [
+        {
+            "name": "Binary Star A",
+            "mass": 2.0e30,
+            "position": [-1e11, 0],
+            "velocity": [0, 15000],
+            "color": [255, 223, 0]
+        },
+        {
+            "name": "Binary Star B",
+            "mass": 1.0e30,
+            "position": [1e11, 0],
+            "velocity": [0, -15000],
+            "color": [255, 69, 0]
+        }
+    ],
+    "t2": [
+        {
+            "name": "Elliptical Star A",
+            "mass": 2.0e30,
+            "position": [-1.5e11, 0],
+            "velocity": [0, 14000],
+            "color": [255, 215, 0]
+        },
+        {
+            "name": "Elliptical Star B",
+            "mass": 1.5e30,
+            "position": [1.2e11, 0],
+            "velocity": [0, -16000],
+            "color": [255, 99, 71]
+        }
+    ],
+    "t3": [
+        {
+            "name": "Star A",
+            "mass": 2.0e30,
+            "position": [-1e11, 0],
+            "velocity": [0, 12000],
+            "color": [255, 223, 0]
+        },
+        {
+            "name": "Smaller Star B",
+            "mass": 1.0e30,
+            "position": [1.5e11, 0],
+            "velocity": [0, -16000],
+            "color": [255, 140, 0]
+        }
+    ],
+    "t4": [
+        {
+            "name": "Massive Star",
+            "mass": 5.0e30,
+            "position": [-8e10, 0],
+            "velocity": [0, 10000],
+            "color": [255, 140, 0]
+        },
+        {
+            "name": "Smaller Star",
+            "mass": 1.0e30,
+            "position": [8e10, 0],
+            "velocity": [0, -50000],
+            "color": [135, 206, 235]
+        }
+    ],
+    "t5": [
+        {
+            "name": "Binary Pair 1 - Star A",
+            "mass": 2.0e30,
+            "position": [-2e8, 0],
+            "velocity": [0, 12000],
+            "color": [255, 165, 0]
+        },
+        {
+            "name": "Binary Pair 1 - Star B",
+            "mass": 2.0e30,
+            "position": [-2.5e11, 0],
+            "velocity": [0, -12000],
+            "color": [255, 69, 0]
+        },
+        {
+            "name": "Binary Pair 2 - Star C",
+            "mass": 1.5e30,
+            "position": [2e11, 0],
+            "velocity": [0, -8000],
+            "color": [0, 128, 255]
+        },
+        {
+            "name": "Binary Pair 2 - Star D",
+            "mass": 1.5e30,
+            "position": [2.5e11, 0],
+            "velocity": [0, 8000],
+            "color": [138, 43, 226]
+        }
+    ],
+    "t6": [
+        {
+            "name": "Massive Body",
+            "mass": 2.0e30,
+            "position": [0, 0],
+            "velocity": [0, 0],
+            "color": [0, 128, 255]
+        },
+        {
+            "name": "Body 1",
+            "mass": 1.0e29,
+            "position": [-1e11, 0],
+            "velocity": [0, 50000],
+            "color": [255, 20, 147]
+        },
+        {
+            "name": "Body 2",
+            "mass": 1.0e29,
+            "position": [1e11, 0],
+            "velocity": [0, -50000],
+            "color": [0, 255, 127]
+        }
+    ],
+    "t7": [
+        {
+            "name": "Body 1",
+            "mass": 1.0e30,
+            "position": [-1e11, 0],
+            "velocity": [0, 30000],
+            "color": [255, 0, 0]
+        },
+        {
+            "name": "Body 2",
+            "mass": 1.0e30,
+            "position": [1e11, 0],
+            "velocity": [0, -30000],
+            "color": [0, 255, 0]
+        },
+        {
+            "name": "Body 3",
+            "mass": 1.0e30,
+            "position": [0, 1.732e11],
+            "velocity": [-26000, 0],
+            "color": [0, 0, 255]
+        }
+    ]
+}
