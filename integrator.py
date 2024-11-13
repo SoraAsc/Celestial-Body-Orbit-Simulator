@@ -26,8 +26,10 @@ class Integrator():
         self.method = method
         if self.method == "RK4":
             self.method_implementation = self.rk4_step
-        else: 
+        elif self.method == "Euler": 
             self.method_implementation = self.euler_step
+        else:
+            raise Exception("Sorry, this method not exist")
 
     def integrate(self, body, delta_t):
         self.method_implementation(body, delta_t)

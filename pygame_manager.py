@@ -17,21 +17,28 @@ class PygameManager:
         self.trail_surface.set_alpha(30)
         self.clock = pygame.time.Clock()
 
-        funcs = FUNCTIONS_MANAGER(refresh_simulation=self.initialize_simulation, load_template=self.load_template)
+        funcs = FUNCTIONS_MANAGER(refresh_simulation=self.initialize_simulation, 
+                                  load_template=self.load_template, change_method=self.change_method,
+                                  toggle_trails=self.toggle_trails)
         self.ui_manager = UIManager(funcs)
+        self.template_loader = TemplateLoader("templates.json", "solar_system")
 
         self.initialize_simulation()
     
     def initialize_simulation(self):
-        self.template_loader = TemplateLoader("templates.json")
-        self.simulation = Simulation(self.template_loader.get_template("solar_system"), DELTA_T)
+        self.simulation = Simulation(self.template_loader.get_template(self.template_loader.template_name), DELTA_T)
         
         # Initial variabels
         self.zoom = 1
         self.camera_pos = [0, 0]
         self.is_dragging = False
+        self.is_trail_actived = True
         self.last_mouse_pos = None
         self.trail_limit = 200
+
+    def toggle_trails(self) -> bool:
+        self.is_trail_actived = not self.is_trail_actived
+        return self.is_trail_actived
 
     def load_template(self, template_name: str):
         self.simulation.change_bodies(self.template_loader.get_template(template_name))
@@ -41,7 +48,9 @@ class PygameManager:
         self.camera_pos = [0, 0]
         self.is_dragging = False
         self.last_mouse_pos = None
-
+    
+    def change_method(self, method_name: str):
+        self.simulation.integrator.choose_method(method_name)
 
     def draw(self):
         """Draw Simulation elements on the pygame screen"""
@@ -61,11 +70,11 @@ class PygameManager:
             y = int((body.position[1] / SCALE - self.camera_pos[1])  * self.zoom + CENTER[1])
             pygame.draw.circle(self.screen, body.color, (x, y), 8 * self.zoom)
 
-            for trail_pos in body.trails_pos:
-                trail_x = int((trail_pos[0] / SCALE - self.camera_pos[0]) * self.zoom + CENTER[0])
-                trail_y = int((trail_pos[1] / SCALE - self.camera_pos[1]) * self.zoom + CENTER[1])
-
-                pygame.draw.circle(self.trail_surface, body.color, (trail_x, trail_y), 2 * self.zoom)
+            if self.is_trail_actived:
+                for trail_pos in body.trails_pos:
+                    trail_x = int((trail_pos[0] / SCALE - self.camera_pos[0]) * self.zoom + CENTER[0])
+                    trail_y = int((trail_pos[1] / SCALE - self.camera_pos[1]) * self.zoom + CENTER[1])
+                    pygame.draw.circle(self.trail_surface, body.color, (trail_x, trail_y), 2 * self.zoom)
 
         self.screen.blit(self.trail_surface, (0, 0))
 

@@ -31,16 +31,28 @@ class UIManager:
         self.commands = {
             "restart": self.restart_simulation,
             "template": self.change_template,
-            "method": self.change_template,
-            "toggle_trails": self.change_template,
+            "method": self.change_method,
+            "toggle_trails": self.toggle_trails,
             "set_time_interval": self.change_template,
             "generate_chart": self.change_template,
             "help": self.show_help,
         }
+    
+    def toggle_trails(self, _):
+        self.set_feedback(f"Trails is {'actived' if self.funcs.toggle_trails() else 'desactived'}!")
 
-    def restart_simulation(self, _):
-        """Restart the simulation"""
-        
+    def change_method(self, args: List[str]):
+        if args:
+            method_name = args[0]
+            try:
+                self.funcs.change_method(method_name)
+                self.set_feedback(f"Method changed to '{method_name}'.")
+            except Exception:
+                self.set_feedback(f"Method '{method_name}' not exist.")
+        else:
+            self.set_feedback("Please specify a method name. Usage: /method [method_name]")
+
+    def restart_simulation(self, _):        
         self.funcs.refresh_simulation()
         self.set_feedback("Simulation restarted!")
         pass
