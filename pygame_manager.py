@@ -1,7 +1,7 @@
 import sys
 import pygame
 
-from config import CENTER, DELTA_T, SCALE, SCREEN_SIZE, WORLD_SIZE
+from config import CENTER, DELTA_T, SCALE, SCREEN_SIZE, WORLD_SIZE, FUNCTIONS_MANAGER
 from simulation import Simulation
 from template_loader import TemplateLoader
 from ui_manager import UIManager
@@ -10,23 +10,38 @@ class PygameManager:
     """This classs handles the render and pygame interaction"""
 
     def __init__(self):
-        """Initialize the Pygame Manager"""
-
         pygame.init()
+        
         self.screen = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1]))
         self.trail_surface = pygame.Surface((SCREEN_SIZE[0], SCREEN_SIZE[1]), pygame.SRCALPHA)  # Allow transparency
         self.trail_surface.set_alpha(30)
+        self.clock = pygame.time.Clock()
+
+        funcs = FUNCTIONS_MANAGER(refresh_simulation=self.initialize_simulation, load_template=self.load_template)
+        self.ui_manager = UIManager(funcs)
+
+        self.initialize_simulation()
+    
+    def initialize_simulation(self):
         self.template_loader = TemplateLoader("templates.json")
         self.simulation = Simulation(self.template_loader.get_template("solar_system"), DELTA_T)
-        self.clock = pygame.time.Clock()
-        self.ui_manager = UIManager()
-        self.trail_limit = 200
-
+        
         # Initial variabels
         self.zoom = 1
         self.camera_pos = [0, 0]
         self.is_dragging = False
         self.last_mouse_pos = None
+        self.trail_limit = 200
+
+    def load_template(self, template_name: str):
+        self.simulation.change_bodies(self.template_loader.get_template(template_name))
+        
+        # Reset variable values
+        self.zoom = 1
+        self.camera_pos = [0, 0]
+        self.is_dragging = False
+        self.last_mouse_pos = None
+
 
     def draw(self):
         """Draw Simulation elements on the pygame screen"""

@@ -22,6 +22,9 @@ class Simulation:
         self.method = method
         self.integrator = Integrator(method, self.f)
 
+    def change_bodies(self, bodies: list[CelestialBody]):
+        self.bodies = bodies
+
     def f(self, body: CelestialBody, t: double, position: ndarray, velocity: ndarray) -> Tuple[ndarray, ndarray]:
         """Calculate the derivatives (velocity and acceleration) for a given body at a given time and state.
 
