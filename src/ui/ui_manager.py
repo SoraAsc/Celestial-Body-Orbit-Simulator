@@ -1,3 +1,4 @@
+import os
 import time
 from typing import List
 import pygame
@@ -11,7 +12,8 @@ class UIManager:
         """Initialize the UI Manager"""
 
         self.funcs = funcs
-        self.manager = pygame_gui.UIManager((SCREEN_SIZE[0], SCREEN_SIZE[1]), "theme.json")
+        theme_path = os.path.join(os.path.dirname(__file__), "theme.json")
+        self.manager = pygame_gui.UIManager((SCREEN_SIZE[0], SCREEN_SIZE[1]), theme_path)
         self.text_entry = pygame_gui.elements.UITextEntryLine(
             relative_rect=pygame.Rect((0, SCREEN_SIZE[0] - 30), (SCREEN_SIZE[1], 30)), manager=self.manager)
         self.text_entry.set_text("")
@@ -33,7 +35,6 @@ class UIManager:
             "template": self.change_template,
             "method": self.change_method,
             "toggle_trails": self.toggle_trails,
-            "set_time_interval": self.change_template,
             "generate_chart": self.change_template,
             "help": self.show_help,
         }

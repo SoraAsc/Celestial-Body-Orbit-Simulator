@@ -1,6 +1,6 @@
 import numpy as np
 
-from celestial_body import CelestialBody
+from core.celestial_body import CelestialBody
 
 class Integrator():
     """The Integrator class contains the methods for the integration algorithms that update the position and velocity of the bodies"""

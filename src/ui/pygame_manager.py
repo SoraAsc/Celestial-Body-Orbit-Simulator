@@ -2,9 +2,9 @@ import sys
 import pygame
 
 from config import CENTER, DELTA_T, SCALE, SCREEN_SIZE, WORLD_SIZE, FUNCTIONS_MANAGER
-from simulation import Simulation
-from template_loader import TemplateLoader
-from ui_manager import UIManager
+from core.simulation import Simulation
+from utils.template_loader import TemplateLoader
+from ui.ui_manager import UIManager
 
 class PygameManager:
     """This classs handles the render and pygame interaction"""

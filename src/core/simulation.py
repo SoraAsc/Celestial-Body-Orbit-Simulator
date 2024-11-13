@@ -1,9 +1,9 @@
 from typing import Tuple
 from numpy import double, ndarray
 import numpy as np
-from celestial_body import CelestialBody
+from core.celestial_body import CelestialBody
 from config import G
-from integrator import Integrator
+from core.integrator import Integrator
 
 class Simulation:
     """Class responsible for handling the simulation and the calculations involving it"""
