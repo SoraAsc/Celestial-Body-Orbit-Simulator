@@ -5,6 +5,7 @@ from config import CENTER, DELTA_T, SCALE, SCREEN_SIZE, WORLD_SIZE, FUNCTIONS_MA
 from core.simulation import Simulation
 from utils.template_loader import TemplateLoader
 from ui.ui_manager import UIManager
+from utils.visualization import Visualization
 
 class PygameManager:
     """This classs handles the render and pygame interaction"""
@@ -18,12 +19,20 @@ class PygameManager:
         self.clock = pygame.time.Clock()
 
         funcs = FUNCTIONS_MANAGER(refresh_simulation=self.initialize_simulation, 
-                                  load_template=self.load_template, change_method=self.change_method,
-                                  toggle_trails=self.toggle_trails)
+                                  load_template=self.load_template, 
+                                  change_method=self.change_method,
+                                  toggle_trails=self.toggle_trails, clear_trails=self.clear_trails,
+                                  generate_chart=self.generate_chart,
+                                  change_saved_trails_limit=self.change_saved_trails_limit)
         self.ui_manager = UIManager(funcs)
         self.template_loader = TemplateLoader("templates.json", "solar_system")
+        self.visualization = Visualization()
 
         self.initialize_simulation()
+
+    def clear_trails(self):
+        for body in self.simulation.bodies:
+            body.trails_pos = []
     
     def initialize_simulation(self):
         self.simulation = Simulation(self.template_loader.get_template(self.template_loader.template_name), DELTA_T)
@@ -35,10 +44,19 @@ class PygameManager:
         self.is_trail_actived = True
         self.last_mouse_pos = None
         self.trail_limit = 200
+    
+    def change_saved_trails_limit(self, num: int):
+        self.trail_limit = num
 
     def toggle_trails(self) -> bool:
         self.is_trail_actived = not self.is_trail_actived
         return self.is_trail_actived
+
+    def generate_chart(self, type: str):
+        if type == "trajectory" or type == "1":
+            self.visualization.plot_orbital_trajectories(self.simulation.bodies)
+        else:
+            self.visualization.plot_orbital_trajectories(self.simulation.bodies)
 
     def load_template(self, template_name: str):
         self.simulation.change_bodies(self.template_loader.get_template(template_name))

@@ -35,12 +35,45 @@ class UIManager:
             "template": self.change_template,
             "method": self.change_method,
             "toggle_trails": self.toggle_trails,
-            "generate_chart": self.change_template,
+            "change_trails_limit": self.change_saved_trails_limit,
+            "generate_chart": self.generate_chart,
+            "clear_trails": self.clear_trails,
             "help": self.show_help,
         }
     
+    def clear_trails(self, _):
+        self.funcs.clear_trails()
+
     def toggle_trails(self, _):
         self.set_feedback(f"Trails is {'actived' if self.funcs.toggle_trails() else 'desactived'}!")
+
+    def change_saved_trails_limit(self, args: List[str]):
+        if args:
+            try:
+                limit = int(args[0])
+                if 20 <= limit <= 5000:
+                    self.funcs.change_saved_trails_limit(limit)
+                    self.set_feedback(f"Saved trails limit set to {limit}.")
+                else:
+                    self.set_feedback("Limit must be between 20 and 5000.")
+            except ValueError:
+                self.set_feedback("Invalid input. Please provide a valid number.")
+        else:
+            self.set_feedback("Please specify a limit. Usage: /change_trails_limit [limit]")
+
+
+
+    def generate_chart(self, args: List[str]):
+        if args:
+            chart_type = args[0]
+            try:
+                self.funcs.generate_chart(chart_type)
+                self.set_feedback(f"Chart '{chart_type}' generated.")
+            except Exception:
+                self.set_feedback(f"Chart '{chart_type}' not exist.")
+        else:
+            self.set_feedback("Please specify a chart type. Usage: /generate_chart [chart_type]")
+
 
     def change_method(self, args: List[str]):
         if args:
@@ -119,7 +152,6 @@ class UIManager:
             "/method [name] - Change integration method(Euler, RK4)\n"
             "/toggle_trails - Enable or Disable trail visualization\n"
             "/restart - restart the current template\n"
-            "/set_time_interval [number] - Set Simulation Time Interval\n"
             "/positions_size [number] - Change The limit of positions to save\n"
             "/generate_chart [type] [name] - Generate a graph with the lasts positions\n"
             "/help - Show commands list"
