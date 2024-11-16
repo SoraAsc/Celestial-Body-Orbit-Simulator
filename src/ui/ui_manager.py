@@ -29,6 +29,11 @@ class UIManager:
 
         self.input_active = False
         self.feedback_timer = None
+
+        self.templates_number = {
+            "1": "solar_system", "2": "binary_system_equal_mass", "3": "binary_system_unequal_mass"
+        }
+
         # Define the command dictionary with specific function signatures
         self.commands = {
             "restart": self.restart_simulation,
@@ -65,8 +70,8 @@ class UIManager:
 
     def generate_chart(self, args: List[str]):
         if args:
-            chart_type = args[0]
             try:
+                chart_type = args[0]
                 self.funcs.generate_chart(chart_type)
                 self.set_feedback(f"Chart '{chart_type}' generated.")
             except Exception:
@@ -134,8 +139,8 @@ class UIManager:
     
     def change_template(self, args: List[str]):
         if args:
-            template_name = args[0]
             try:
+                template_name = self.templates_number.get(args[0]) or args[0]
                 self.funcs.load_template(template_name)
                 self.set_feedback(f"Template changed to '{template_name}'.")
             except TypeError:
