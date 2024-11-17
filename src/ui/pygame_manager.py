@@ -41,6 +41,7 @@ class PygameManager:
         self.zoom = 1
         self.camera_pos = [0, 0]
         self.is_dragging = False
+        self.is_running = True
         self.is_trail_actived = True
         self.last_mouse_pos = None
         self.trail_limit = 200
@@ -99,28 +100,31 @@ class PygameManager:
         self.ui_manager.draw(self.screen)
 
         pygame.display.flip()
+
+    def handle_mouse_events(self, event: pygame.Event):
+        if event.type == pygame.QUIT:
+            self.is_running = False
+            sys.exit()
+        elif event.type == pygame.MOUSEWHEEL: # Handle Zoom
+            if(event.y > 0): # Zoom in
+                self.zoom = min(self.zoom * 1.1, 5)
+            elif event.y < 0: # Zoom out
+                self.zoom = max(self.zoom / 1.1, 0.2)
+        elif event.type == pygame.MOUSEBUTTONDOWN: # Start dragging
+            if event.button == 1:  # Left mouse button
+                self.is_dragging = True
+                self.last_mouse_pos = event.pos
+        elif event.type == pygame.MOUSEBUTTONUP: # Stop dragging
+            if event.button == 1:
+                self.is_dragging = False
     
     def run(self):
         """Main Render Loop"""
-        running = True
-        while running:
+        self.is_running = True
+        while self.is_running:
             delta_time = self.clock.tick(60) / 1000.0
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                    sys.exit()
-                elif event.type == pygame.MOUSEWHEEL: # Handle Zoom
-                    if(event.y > 0): # Zoom in
-                        self.zoom = min(self.zoom * 1.1, 5)
-                    elif event.y < 0: # Zoom out
-                        self.zoom = max(self.zoom / 1.1, 0.2)
-                elif event.type == pygame.MOUSEBUTTONDOWN: # Start dragging
-                    if event.button == 1:  # Left mouse button
-                        self.is_dragging = True
-                        self.last_mouse_pos = event.pos
-                elif event.type == pygame.MOUSEBUTTONUP: # Stop dragging
-                    if event.button == 1:
-                        self.is_dragging = False
+                self.handle_mouse_events(event)
                 self.ui_manager.handle_event(event)
                 
             if self.is_dragging: # Handle panning

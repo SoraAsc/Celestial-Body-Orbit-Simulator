@@ -23,7 +23,7 @@ This project is a physics-based simulation of celestial bodies, modeling their m
     - Python
     - Numpy
     - Pygame
+    - Pygame Gui
 
 3. **References:**
-
     - https://nssdc.gsfc.nasa.gov/planetary/factsheet/
