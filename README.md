@@ -15,8 +15,8 @@ This project is a physics-based simulation of celestial bodies, modeling their m
 1. **Clone the Repository:**
 
     ```
-    git clone ...
-    cd ...
+    git clone https://github.com/SoraAsc/Celestial-Body-Orbit-Simulator.git
+    cd Celestial-Body-Orbit-Simulator
     ```
 
 2. **Install Dependencies:**
