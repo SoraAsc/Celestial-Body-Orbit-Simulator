@@ -66,8 +66,6 @@ class UIManager:
         else:
             self.set_feedback("Please specify a limit. Usage: /change_trails_limit [limit]")
 
-
-
     def generate_chart(self, args: List[str]):
         if args:
             try:
@@ -78,7 +76,6 @@ class UIManager:
                 self.set_feedback(f"Chart '{chart_type}' not exist.")
         else:
             self.set_feedback("Please specify a chart type. Usage: /generate_chart [chart_type]")
-
 
     def change_method(self, args: List[str]):
         if args:
@@ -158,7 +155,7 @@ class UIManager:
             "/toggle_trails - Enable or Disable trail visualization\n"
             "/restart - restart the current template\n"
             "/positions_size [number] - Change The limit of positions to save\n"
-            "/generate_chart [type] [name] - Generate a graph with the lasts positions\n"
+            "/generate_chart [name] - Generate a graph with the lasts positions\n"
             "/help - Show commands list"
         )
     
